@@ -9,4 +9,3 @@ In this submission, there are two main components:
 - Statistics.tsx (which compiles the information from the form inputs)
 
 All other CSS elements can be found in index.css.
->>>>>>> 3fd10469592e496582b1ea6e16b42d38634aceab
