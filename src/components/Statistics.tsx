@@ -1,13 +1,30 @@
 type Props = {
   allFeedback: any[]
-  groupFeedback: any
+  groupFeedback: Record<string, Group>
+}
+
+type Group = {
+    totalRating: number
+    count: number
 }
 
 const Statistics = ({ allFeedback, groupFeedback }: Props) => {
+    const totals = Object.values(groupFeedback).reduce(
+        (acc, group) => {
+            acc.totalRating += group.totalRating;
+            acc.count += group.count;
+            return acc;
+        },
+        { totalRating: 0, count: 0 }
+    );
+
+    const grandAverage =
+        totals.count === 0 ? 0 : totals.totalRating / totals.count;
+
     return (
         <>
             <div className="w-full lg:w-[70%] bg-[#E0A387] p-5 shadow-md">
-                <h1 className="text-4xl text-white text-center mb-4">Total Feedback: {allFeedback.length}</h1>
+                <h1 className="text-4xl text-white text-center mb-4 font-bold">{grandAverage.toFixed(1)} ({allFeedback.length} Reviews)</h1>
                 <div className="w-full flex items-center gap-4 mb-5 rounded-md justify-center">
                 {
                     Object.keys(groupFeedback).length > 0 ? (
@@ -19,7 +36,7 @@ const Statistics = ({ allFeedback, groupFeedback }: Props) => {
                                 <div className="card p-6 w-72 rounded-md bg-white shadow-md">
                                     <h3 className="font-bold text-xl">{type}</h3>
                                     <h4>Average Rating: <span>{averageRating.toFixed(1)}</span></h4>
-                                    <h4>Total Feedback: <span>{groupFeedback[type].count}</span></h4>
+                                    <h4>Total Reviews: <span>{groupFeedback[type].count}</span></h4>
                                 </div>
                             )
                         })

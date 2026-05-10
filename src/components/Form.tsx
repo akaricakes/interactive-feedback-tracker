@@ -76,7 +76,8 @@ const Form = () => {
     return (
         <div className="container mx-auto mt-5 rounded-md bg-white shadow-lg flex items-center flex-col justify-center">
             <form onSubmit={handleSubmit} className="p-10 md:p-0 flex flex-col w-full max-w-xl gap-4 items-center">
-                <h1 className="mt-4 text-4xl font-bold capitalize">Tech Assistance Feedback Form</h1>
+                <h1 className="mt-4 text-4xl font-bold">Tech Assistance Feedback Form</h1>
+                <h1><span className="text-red-500">*</span> is required.</h1>
                 <select value={formData.feedbackType} onChange={handleChange} name="feedbackType" required className="w-full bg-gray-100 px-4 py-2 rounded-md border border-gray-400">
                     <option value="">Select Feedback Type*</option>
                     <option value="Hardware Issues">Hardware Issues</option>
@@ -97,11 +98,14 @@ const Form = () => {
                     <option value="5">5. Excellent</option>
                 </select>
                 <textarea onChange={handleChange} value={formData.comment} name="comment" rows={4} className="w-full bg-gray-100 px-4 py-2 rounded-md border border-gray-400" placeholder="Please drop your valuable feedback!"></textarea>
-                <h1><span className="text-red-500">*</span> is required.</h1>
                 <button className="px-6 mt-4 mb-4 w-full py-2 bg-[#BA6B57] hover:bg-[#E0A387] rounded-md border-none outline-none text-white">Submit</button>
             </form>
 
-            {allFeedback.length > 0 && (
+            {allFeedback.length === 0 ? (
+                <div className="w-full lg:w-[70%] bg-[#E0A387] p-5 shadow-md">
+                    <h1 className="text-4xl text-white text-center mb-4">No feedback yet...</h1>
+                </div>
+                ) : (
                 <Statistics
                     allFeedback={allFeedback}
                     groupFeedback={groupFeedback}
