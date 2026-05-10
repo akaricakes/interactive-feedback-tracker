@@ -1,6 +1,6 @@
 # akari kwok's csci 39548 ; homework #4
 
-This submission for the assignment was inspired by my workplace system. 
+The submission for this assignment was inspired by my workplace system. 
 The template for this site was derived from this [tutorial](https://www.youtube.com/watch?v=fH46lAMw6U4).
 
 In this submission, there are two main components:
